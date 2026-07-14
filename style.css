@@ -7,39 +7,96 @@
 
 /* ---------- Design tokens ---------- */
 :root {
-  /* Surfaces */
-  --bg: #f6f7fb;
+  --bg: #fff6fc;
   --surface: #ffffff;
-  --column-bg: #eceef5;
-  --border: #dadeea;
+  --column-bg: #fddde6;
+  --border: #ecdff8;
 
   /* Text */
   --text: #1f2430;
-  --text-muted: #6b7280;
+  --text-muted: #8a90a2;
 
   /* Brand / accent */
-  --accent: #5b5fef;
+  --accent: #cda6c3;
   --accent-contrast: #ffffff;
 
-  /* Status accents — one per column, used sparingly */
-  --status-todo: #6b7280;
-  --status-progress: #d97706;
-  --status-done: #10b981;
+  /* Status colors — one per column, drives header + accent bar + tags */
+  --status-todo: #e0a300;
+  --status-todo-bg: #fdf1c8;
+  --status-progress: #7c5ce0;
+  --status-progress-bg: #e6ddf9;
+  --status-review: #1fa971;
+  --status-review-bg: #d7f5e3;
+  --status-done: #2f8fd1;
+  --status-done-bg: #dbeefb;
+
 
   /* Priority dots */
-  --priority-high: #ef4444;
-  --priority-medium: #d97706;
-  --priority-low: #10b981;
+  --priority-high: #ff8fa3;
+  --priority-medium: #ffcf86;
+  --priority-low: #a7e39a;
+
+
+
+
+
+
+
 
   /* Shape / spacing */
   --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-md: 14px;
   --shadow-card: 0 1px 2px rgba(31, 36, 48, 0.06), 0 1px 1px rgba(31, 36, 48, 0.04);
   --shadow-card-hover: 0 4px 12px rgba(31, 36, 48, 0.10);
 
   /* Fonts */
   --font-display: "Sora", "Segoe UI", sans-serif;
   --font-body: "Inter", "Segoe UI", sans-serif;
+
+
+/* Dark mode — flip the same tokens, everything below just follows along */
+body.dark {
+  --bg: #201c2e;
+  --surface: #2a2440;
+  --column-bg: #29223c;
+  --border: #3a3153;
+  --text: #f1ecff;
+  --text-muted: #b3a8d4;
+}
+
+
+/* TO DO Button (Soft Pastel Yellow) */
+[data-status="todo"] .column__add-btn {
+  background-color: #fef9c3 !important; 
+  color: #854d0e !important; 
+}
+
+/* IN PROGRESS Button (Purple) */
+[data-status="in-progress"] .column__add-btn {
+  background-color: #e9d5ff !important;
+  color: #6b21a8 !important;
+}
+
+/* IN REVIEW Button (Green) */
+[data-status="in-review"] .column__add-btn {
+  background-color: #ccfbf1 !important;
+  color: #0f766e !important;
+}
+
+/* DONE Button (Sky Blue) */
+[data-status="done"] .column__add-btn {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+}
+
+/* HOVER STATE (Turns White) */
+.column__add-btn:hover {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+
+
 }
 
 /* ---------- Reset ---------- */
@@ -128,7 +185,7 @@ button:focus-visible {
 }
 
 .btn:hover {
-  background: var(--column-bg);
+  background: var(--bg);
 }
 
 .btn:active {
@@ -156,69 +213,69 @@ button:focus-visible {
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .column {
   background: var(--column-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 12px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   min-width: 0; /* prevents overflow inside grid/flex */
 }
 
-/* Colored accent strip on top of each column, keyed to status */
-.column::before {
-  content: "";
-  display: block;
-  height: 4px;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  background: var(--status-todo);
-}
-
-.column[data-status="in-progress"]::before {
-  background: var(--status-progress);
-}
-
-.column[data-status="done"]::before {
-  background: var(--status-done);
-}
-
+/* Colored pill header, keyed to status via data-status on .column */
 .column__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 0 2px;
+  padding: 10px 12px;
+  text-align: center;
+  background: var(--status-todo-bg);
+}
+
+.column[data-status="in-progress"] .column__header {
+  background: var(--status-progress-bg);
+}
+
+.column[data-status="in-review"] .column__header {
+  background: var(--status-review-bg);
+}
+
+.column[data-status="done"] .column__header {
+  background: var(--status-done-bg);
 }
 
 .column__title {
-  font-size: 1rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--status-todo);
 }
 
-.column__count {
-  background: var(--surface);
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
+.column[data-status="in-progress"] .column__title {
+  color: var(--status-progress);
+}
+
+.column[data-status="in-review"] .column__title {
+  color: var(--status-review);
+}
+
+.column[data-status="done"] .column__title {
+  color: var(--status-done);
 }
 
 .column__cards {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  padding: 14px;
   min-height: 40px; /* gives drag-and-drop something to target later, even when empty */
 }
 
 .column__add-btn {
-  margin-top: 10px;
+  margin: 0 14px 14px;
   background: transparent;
   border: 1px dashed var(--border);
   border-radius: var(--radius-sm);
@@ -229,15 +286,16 @@ button:focus-visible {
 }
 
 .column__add-btn:hover {
-  background: var(--surface);
+  background: var(--bg);
   color: var(--text);
 }
 
 /* ---------- Cards ---------- */
 .card {
   background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 12px 12px 12px 14px;
+  padding: 12px 12px 12px 16px;
   box-shadow: var(--shadow-card);
   position: relative;
   transition: box-shadow 0.15s ease, transform 0.1s ease;
@@ -248,7 +306,7 @@ button:focus-visible {
   transform: translateY(-1px);
 }
 
-/* Priority dot, positioned as a small left-edge indicator */
+/* Left-edge accent bar, colored to match the column's status */
 .card__priority {
   position: absolute;
   left: 0;
@@ -256,43 +314,164 @@ button:focus-visible {
   bottom: 12px;
   width: 3px;
   border-radius: 3px;
-  background: var(--priority-medium);
+  background: var(--status-todo);
 }
 
-.card[data-priority="high"] .card__priority {
-  background: var(--priority-high);
+.column[data-status="in-progress"] .card__priority {
+  background: var(--status-progress);
 }
 
-.card[data-priority="low"] .card__priority {
-  background: var(--priority-low);
+.column[data-status="in-review"] .card__priority {
+  background: var(--status-review);
+}
+
+.column[data-status="done"] .card__priority {
+  background: var(--status-done);
+}
+
+/* Tag badges (Category / Priority / Task Type / etc.) */
+.card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  background: var(--status-todo-bg);
+  color: var(--status-todo);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.column[data-status="in-progress"] .tag {
+  background: var(--status-progress-bg);
+  color: var(--status-progress);
+}
+
+.column[data-status="in-review"] .tag {
+  background: var(--status-review-bg);
+  color: var(--status-review);
+}
+
+.column[data-status="done"] .tag {
+  background: var(--status-done-bg);
+  color: var(--status-done);
+}
+
+/* Title row with dropdown chevron */
+.card__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
 }
 
 .card__title {
   font-size: 0.92rem;
   font-weight: 600;
-  margin-bottom: 4px;
+}
+
+.card__chevron {
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .card__desc {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
-  margin: 0 0 10px;
+  margin: 2px 0 10px;
   line-height: 1.4;
 }
 
+/* Attachment row: Folder / File / Ticket */
+.card__attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.card__attachment {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* URL link row */
+.card__urls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.card__url {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Notes section */
+.card__notes {
+  margin-bottom: 12px;
+}
+
+.card__notes-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.card__notes-placeholder {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Footer: assignee avatar + due date */
 .card__meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
   font-size: 0.72rem;
 }
 
-.card__label {
-  background: var(--column-bg);
-  color: var(--text);
-  padding: 2px 8px;
-  border-radius: 999px;
-  font-weight: 600;
+.card__assignee {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.card__avatar {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--status-todo-bg);
+  border: 1px solid var(--status-todo);
+  display: inline-block;
+}
+
+.column[data-status="in-progress"] .card__avatar {
+  background: var(--status-progress-bg);
+  border-color: var(--status-progress);
+}
+
+.column[data-status="in-review"] .card__avatar {
+  background: var(--status-review-bg);
+  border-color: var(--status-review);
+}
+
+.column[data-status="done"] .card__avatar {
+  background: var(--status-done-bg);
+  border-color: var(--status-done);
 }
 
 .card__due {
@@ -302,21 +481,18 @@ button:focus-visible {
 
 /* ---------- Responsive breakpoints ---------- */
 
-/* Tablet and up: 3 columns side by side */
-@media (min-width: 768px) {
+/* Tablet and up: columns side by side, 2 per row */
+@media (min-width: 640px) {
   .board {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
-  .column {
-    flex: 1 1 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Desktop: a bit more breathing room */
+/* Desktop: all 4 columns in one row */
 @media (min-width: 1100px) {
   .board {
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 24px;
   }

@@ -34,28 +34,36 @@
     <section class="column" data-status="todo">
       <div class="column__header">
         <h2 class="column__title">To Do</h2>
-        <span class="column__count">2</span>
       </div>
 
       <div class="column__cards" id="todo-cards">
         <!-- Dummy card -->
-        <article class="card" data-priority="high">
+        <article class="card">
           <div class="card__priority" aria-hidden="true"></div>
-          <h3 class="card__title">Design homepage layout</h3>
-          <p class="card__desc">Sketch wireframes for the landing page hero and nav.</p>
-          <div class="card__meta">
-            <span class="card__label">design</span>
-            <span class="card__due">Jul 20</span>
-          </div>
-        </article>
 
-        <article class="card" data-priority="medium">
-          <div class="card__priority" aria-hidden="true"></div>
-          <h3 class="card__title">Set up Firebase project</h3>
-          <p class="card__desc">Create Firestore database and auth config.</p>
+          <div class="card__tags">
+            <span class="tag">Priority</span>
+            <span class="tag">Task Type</span>
+          </div>
+
+          <div class="card__title-row">
+            <h3 class="card__title">Untitled</h3>
+            <span class="card__chevron" aria-hidden="true">⌄</span>
+          </div>
+          <p class="card__desc">Description</p>
+
+         
+          <div class="card__notes">
+            <span class="card__notes-label">Notes:</span>
+            <p class="card__notes-placeholder">Type here...</p>
+          </div>
+
           <div class="card__meta">
-            <span class="card__label">setup</span>
-            <span class="card__due">Jul 18</span>
+            <span class="card__assignee">
+              <span class="card__avatar" aria-hidden="true"></span>
+              To be assigned
+            </span>
+            <span class="card__due">📅 DD MM</span>
           </div>
         </article>
       </div>
@@ -67,17 +75,76 @@
     <section class="column" data-status="in-progress">
       <div class="column__header">
         <h2 class="column__title">In Progress</h2>
-        <span class="column__count">1</span>
       </div>
 
       <div class="column__cards" id="in-progress-cards">
-        <article class="card" data-priority="high">
+        <article class="card">
           <div class="card__priority" aria-hidden="true"></div>
-          <h3 class="card__title">Build board HTML/CSS</h3>
-          <p class="card__desc">Static layout for columns and cards, responsive grid.</p>
+
+          <div class="card__tags">
+            <span class="tag">Category</span>
+            <span class="tag">Priority</span>
+          </div>
+
+          <div class="card__title-row">
+            <h3 class="card__title">Untitled</h3>
+            <span class="card__chevron" aria-hidden="true">⌄</span>
+          </div>
+          <p class="card__desc">Description</p>
+
+         
+          <div class="card__notes">
+            <span class="card__notes-label">Notes:</span>
+            <p class="card__notes-placeholder">Type here...</p>
+          </div>
+
           <div class="card__meta">
-            <span class="card__label">frontend</span>
-            <span class="card__due">Jul 16</span>
+            <span class="card__assignee">
+              <span class="card__avatar" aria-hidden="true"></span>
+              To be assigned
+            </span>
+            <span class="card__due">📅 DD MM</span>
+          </div>
+        </article>
+      </div>
+
+      <button class="column__add-btn">+ Add a card</button>
+    </section>
+
+    <!-- ---- Column: In Review ---- -->
+    <section class="column" data-status="in-review">
+      <div class="column__header">
+        <h2 class="column__title">In Review</h2>
+      </div>
+
+      <div class="column__cards" id="in-review-cards">
+        <article class="card">
+          <div class="card__priority" aria-hidden="true"></div>
+
+          <div class="card__tags">
+            <span class="tag">Task Type</span>
+            <span class="tag">Environment</span>
+          </div>
+
+          <div class="card__title-row">
+            <h3 class="card__title">Untitled</h3>
+            <span class="card__chevron" aria-hidden="true">⌄</span>
+          </div>
+          <p class="card__desc">Description</p>
+
+        
+
+          <div class="card__notes">
+            <span class="card__notes-label">Notes:</span>
+            <p class="card__notes-placeholder">Type here...</p>
+          </div>
+
+          <div class="card__meta">
+            <span class="card__assignee">
+              <span class="card__avatar" aria-hidden="true"></span>
+              To be assigned
+            </span>
+            <span class="card__due">📅 DD MM</span>
           </div>
         </article>
       </div>
@@ -89,17 +156,35 @@
     <section class="column" data-status="done">
       <div class="column__header">
         <h2 class="column__title">Done</h2>
-        <span class="column__count">1</span>
       </div>
 
       <div class="column__cards" id="done-cards">
-        <article class="card" data-priority="low">
+        <article class="card">
           <div class="card__priority" aria-hidden="true"></div>
-          <h3 class="card__title">Agree on task object shape</h3>
-          <p class="card__desc">Synced with teammate on Firestore task fields.</p>
+
+          <div class="card__tags">
+            <span class="tag">Category</span>
+            <span class="tag">Status</span>
+          </div>
+
+          <div class="card__title-row">
+            <h3 class="card__title">Untitled</h3>
+            <span class="card__chevron" aria-hidden="true">⌄</span>
+          </div>
+          <p class="card__desc">Description</p>
+
+         
+          <div class="card__notes">
+            <span class="card__notes-label">Notes:</span>
+            <p class="card__notes-placeholder">Type here...</p>
+          </div>
+
           <div class="card__meta">
-            <span class="card__label">planning</span>
-            <span class="card__due">Jul 14</span>
+            <span class="card__assignee">
+              <span class="card__avatar" aria-hidden="true"></span>
+              To be assigned
+            </span>
+            <span class="card__due">📅 DD MM</span>
           </div>
         </article>
       </div>
@@ -110,7 +195,5 @@
   </main>
 
   <!-- js/board.js and js/ui.js will come in Week 2 -->
-  <script type="module" src="js/firebase-config.js"></script>
-  <script type="module" src="js/auth.js"></script>
 </body>
 </html>
